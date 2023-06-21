@@ -1,20 +1,19 @@
-import { useState } from 'react';
+import useCreatePost from 'src/Hooks/useCreatePost';
 
 export default function Post() {
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const [validPost, setValidPost] = useState(false);
-
-    function isValidPost() {
-        if (title && content) {
-            setValidPost(true)
-            console.log('Posted')
-        }
-    }
+    const {
+        username,
+        title,
+        setTitle,
+        content,
+        setContent,
+        validPost,
+        handleCreatePost
+    } = useCreatePost();
 
     return (
         <div className='container p-6 flex flex-col'>
-            <h3 className='font-bold text-xl mb-6'>What&apos;s on your mind?</h3>
+            <h3 className='font-bold text-xl mb-6'>{`What's on your mind ${username}?`}</h3>
 
             <label htmlFor="title ">Title</label>
             <input
@@ -35,7 +34,7 @@ export default function Post() {
             <button
                 className={`button ${title && content ? 'bg-blue' : 'bg-gray-50'}`}
                 disabled={validPost}
-                onClick={isValidPost}
+                onClick={handleCreatePost}
             >
                 Create
             </button>

@@ -1,8 +1,12 @@
+import { useValidationLogin } from "src/Hooks/useValidation";
 import logo from "../../assets/codeleap-black.svg";
-import { useValidation } from "src/Hooks/useValidation";
+import useFetch from "src/Hooks/useFetch";
 
 export default function Login() {
-    const { handleInput, login, username } = useValidation();
+    const { handleInput, login, user } = useValidationLogin();
+
+    //deletar apos os testes (é  soh para ver login no clg)
+    const { findPosts } = useFetch();
 
     return (
         <div className="w-screen h-screen flex flex-col justify-center items-center">
@@ -20,8 +24,8 @@ export default function Login() {
                     onChange={handleInput}
                 />
                 <button
-                    className={`button ${username ? 'bg-blue' : 'bg-gray-50'} uppercase`}
-                    disabled={!username}
+                    className={`button ${user ? 'bg-blue' : 'bg-gray-50'} uppercase`}
+                    disabled={!user}
                     onClick={login}
                 >
                     Enter

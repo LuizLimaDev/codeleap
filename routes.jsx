@@ -9,7 +9,7 @@ const router = createBrowserRouter([
         element: <Login />,
     },
     {
-        path: '/dashboard',
+        path: '/dashboard/:username',
         element: <Dashboard />
     }
 ]);

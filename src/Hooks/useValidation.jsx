@@ -2,33 +2,34 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export const useValidation = () => {
-    const [username, setUsername] = useState(false)
+export const useValidationLogin = () => {
     const navigate = useNavigate()
     const posts = useSelector(state => state.posts);
+    const [user, setUser] = useState(false)
+    const [userName, setUsername] = useState('')
 
     function handleInput(e) {
+        const currentUser = e.target.value;
+        setUser(false);
 
-        const user = e.target.value;
-        setUsername(false);
-
-        const findUser = posts.find(username => username.userName === user);
+        const findUser = posts.find(user => user.username === currentUser);
 
         if (!findUser) {
             return;
         }
 
-        console.log(`Bem vindo(a) ${findUser.userName}`)
-        setUsername(true)
+        setUser(true)
+        setUsername(findUser.username)
     }
 
     function login() {
-        navigate('/dashboard');
+        navigate(`/dashboard/${userName}`);
     }
 
     return {
-        username,
+        user,
         handleInput,
-        login
+        login,
+        userName
     }
 }
